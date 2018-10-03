@@ -2,7 +2,7 @@
 
 ##### Motivation:
 
-_A webservice that fetches the current price levels for verge and serves them via the api to reduce request rates on the original services and raises the privacy and security for our users by not requiring them to access a 3rd parties api._
+_A webservice that fetches the current price levels for verge and serves them via the api to reduce request rates on the original services and raises the privacy and security for our users by not requiring them to access a 3rd-party api._
 
 ## Requirements
 
