@@ -1,22 +1,22 @@
-var mongoose = require('mongoose')
-const fetch = require('node-fetch')
-const Price = mongoose.model('Price')
-const priceTable = require('./priceTable.json')
-const { logger } = require('../logging')
+import mongoose from "mongoose";
+import fetch from "node-fetch";
+const Price = mongoose.model("Price");
+import priceTable from "./priceTable.json";
+import { logger } from "../logging";
 
-const priceUpdate = content =>
+const priceUpdate = (content: { currency: string }) =>
   Price.updateOne(
     { currency: content.currency },
     content,
     { upsert: true, setDefaultsOnInsert: true },
     err => {
-      if (err) logger.error(err)
-      else logger.info(`Updated currency (${content.currency}) successfully`)
+      if (err) logger.error(err);
+      else logger.info(`Updated currency (${content.currency}) successfully`);
     }
-  )
+  );
 
-const fetchAndUpdatePrices = currency => {
-  fetch('https://api.coinpaprika.com/v1/ticker/xvg-verge')
+const fetchAndUpdatePrices = (currency: string) => {
+  fetch("https://api.coinpaprika.com/v1/ticker/xvg-verge")
     .then(res => res.ok && res.json())
     .then(({ rank }) => {
       fetch(
@@ -41,22 +41,22 @@ const fetchAndUpdatePrices = currency => {
             mktcap: currencyData.MKTCAP,
             totalvolume24H: currencyData.TOTALVOLUME24H,
             totalvolume24Hto: currencyData.TOTALVOLUME24HTO,
-            currency,
-          }
+            currency
+          };
 
-          priceUpdate(newPrice)
-        })
-    })
-}
+          priceUpdate(newPrice);
+        });
+    });
+};
 
 priceTable.currencies.forEach(({ currency }) => {
-  logger.info(`Start fetching currency (${currency})`)
-  fetchAndUpdatePrices(currency)
-})
+  logger.info(`Start fetching currency (${currency})`);
+  fetchAndUpdatePrices(currency);
+});
 
 setInterval(() => {
   priceTable.currencies.forEach(({ currency }) => {
-    logger.info(`Start fetching currency (${currency})`)
-    fetchAndUpdatePrices(currency)
-  })
-}, 2.5 * 60 * 1000)
+    logger.info(`Start fetching currency (${currency})`);
+    fetchAndUpdatePrices(currency);
+  });
+}, 2.5 * 60 * 1000);
