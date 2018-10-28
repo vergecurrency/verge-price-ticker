@@ -4,7 +4,7 @@ import mongoose = require("mongoose");
 const Price = mongoose.model("Price");
 import { sendError, sendJSON } from "./defaultController";
 
-exports.getPriceByCurrency = async (req: Request, res: Response) => {
+export const getPriceByCurrency = async (req: Request, res: Response) => {
   if (!req.params.currency) {
     sendError(res, "you have to send a valid currency tag i.e. EUR");
   }
