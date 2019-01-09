@@ -29,10 +29,10 @@ routes(app);
 /**
  * Handler for everything that didn't found any route
  */
-app.use(function(req, res) {
+/*app.use(function(req, res) {
   logger.warn(`Requested URL was not available: ${req.originalUrl}`);
   res.status(404).send({ url: req.originalUrl + " not found" });
-});
+});*/
 
 // start server on Port XYZ
 app.listen(PORT);
