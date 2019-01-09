@@ -3,3 +3,4 @@ error.log
 .vscode/
 node_modules/
 .gitignore
+/lib
