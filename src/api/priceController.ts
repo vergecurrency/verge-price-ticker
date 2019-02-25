@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-
+import fetch from "node-fetch";
 import mongoose = require("mongoose");
 const Price = mongoose.model("Price");
 import { sendError, sendJSON } from "./defaultController";
@@ -29,4 +29,18 @@ const sendErrorFindingCurrency = (res: Response) => {
     res,
     "We weren't able to fetch your request, maybe check your currency input."
   );
+};
+
+export const getPriceChart = async (req: Request, res: Response) => {
+  try {
+    const filter = req.params.from ? `${req.params.from}/${req.params.till}` : ''
+    
+    fetch(`https://graphs2.coinmarketcap.com/currencies/verge/${filter}`)
+      .then(response => response.json())
+      .then(json => {
+          sendJSON(res, json);
+      });
+  } catch (e) {
+    sendError(res, "Couldn't fetch chart data.");
+  }
 };
