@@ -10,7 +10,7 @@ require("./api/priceModel");
 require("./api/priceFetcher");
 // starting of express
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 
 // mongo db client connection
 mongoose.Promise = global.Promise;
