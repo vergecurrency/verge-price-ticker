@@ -1,0 +1,22 @@
+version: '3'
+services:
+  database:
+    image: mongo:3.4-jessie
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/:/data/db
+    restart: always
+
+  verge-price-tinker:
+    build: .
+    links:
+      - database
+    depends_on:
+      - database
+    ports:
+      - 3003:3003
+    environment:
+      - VPT_MONGODB_URI=mongodb://host.docker.internal:27017/prices
+    restart: always
+    command: npm run prod
