@@ -4,3 +4,4 @@ error.log
 node_modules/
 .gitignore
 /lib
+/data
