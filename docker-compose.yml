@@ -17,6 +17,6 @@ services:
     ports:
       - 3003:3003
     environment:
-      - VPT_MONGODB_URI=mongodb://host.docker.internal:27017/prices
+      - VPT_MONGODB_URL=mongodb://host.docker.internal:27017/prices
     restart: always
     command: npm run prod

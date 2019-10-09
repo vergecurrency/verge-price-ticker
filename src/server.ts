@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3003;
 // mongo db client connection
 mongoose.Promise = global.Promise;
 mongoose.connect(
-  process.env.VPT_MONGODB_URI || "mongodb://localhost/prices",
+  process.env.VPT_MONGODB_URL || "mongodb://localhost/prices",
   { useNewUrlParser: true }
 );
 
