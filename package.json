@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "mongoose": "^5.7.5",
     "node-fetch": "^2.6.7",
     "winston": "^3.1.0"
